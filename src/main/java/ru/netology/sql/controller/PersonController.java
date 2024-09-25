@@ -1,8 +1,10 @@
-package ru.netology.sql;
+package ru.netology.sql.controller;
 
+import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ru.netology.sql.personEnity.PersonEntity;
+import ru.netology.sql.repository.PersonRepository;
 
 import java.util.List;
 

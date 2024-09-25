@@ -1,19 +1,20 @@
-package ru.netology.sql;
+package ru.netology.sql.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.netology.sql.personEnity.PersonEntity;
 
 import java.util.List;
 
 @Repository
 public interface PersonRepository extends JpaRepository<PersonEntity, String> {
 
-    @Query("SELECT p FROM PersonEntity p WHERE p.cityOfLiving = :city")
+    @Query("SELECT p FROM PersonEntity p WHERE lower(p.cityOfLiving) = lower(:city)")
     List<PersonEntity> findAllByCityOfLiving(@Param("city") String city);
 
-    @Query("SELECT p FROM PersonEntity p WHERE p.name = :name")
+    @Query("SELECT p FROM PersonEntity p WHERE lower(p.name) = lower(:name)")
     List<PersonEntity> findByName(@Param("name") String name);
 
     @Query("SELECT p FROM PersonEntity p")

@@ -1,16 +1,14 @@
-package ru.netology.sql;
+package ru.netology.sql.personEnity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(schema = "netology",  name = "persons")
 public class PersonEntity {
 
     @Id
+    @GeneratedValue
     private long id;
 
     @Column(nullable = false)
@@ -31,16 +29,14 @@ public class PersonEntity {
     public PersonEntity() {
     }
 
-    public PersonEntity(long id, String name, String surname, int age, String phoneNumber, String cityOfLiving) {
-        this.id = id;
+    public PersonEntity(String name, String surname, int age, String phoneNumber, String cityOfLiving) {
+//        this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.cityOfLiving = cityOfLiving;
     }
-
-    // Getters and Setters
 
     public long getId() {
         return id;
@@ -88,11 +84,5 @@ public class PersonEntity {
 
     public void setCityOfLiving(String cityOfLiving) {
         this.cityOfLiving = cityOfLiving;
-    }
-
-    @Override
-    public String toString() {
-        return "id=" + id + "\nФамилия: " + surname + "\nИмя: " + name + "\nВозраст: " + age + "\nНомер телефона: " +
-phoneNumber + "\nГород жизни: " + cityOfLiving;
     }
 }
