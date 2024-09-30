@@ -7,17 +7,16 @@ import org.springframework.stereotype.Repository;
 import ru.netology.sql.personEnity.PersonEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PersonRepository extends JpaRepository<PersonEntity, String> {
 
-//    @Query("SELECT p FROM PersonEntity p WHERE lower(p.cityOfLiving) = lower(:city)")
-//    List<PersonEntity> findAllByCityOfLiving(@Param("city") String city);
+    List<PersonEntity> findByCityOfLiving(String city);
 
-    @Query("SELECT p FROM PersonEntity p WHERE LOWER(p.name) = LOWER(:name)")
-    List<PersonEntity> findByName(@Param("name") String name);
+    List<PersonEntity> findByName(String name);
 
+    List<PersonEntity> findByAgeLessThanOrderByAgeAsc(int age);
 
-//    @Query("SELECT p FROM PersonEntity p")
-//    List<PersonEntity> findAll();
+    Optional<PersonEntity> findByNameAndSurname(String name, String surname);
 }
