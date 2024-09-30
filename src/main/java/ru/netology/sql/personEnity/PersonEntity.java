@@ -8,9 +8,6 @@ import jakarta.persistence.*;
 public class PersonEntity {
 
     @Id
-    @GeneratedValue
-    private long id;
-
     @Column(nullable = false)
     private String name;
 
@@ -30,21 +27,20 @@ public class PersonEntity {
     }
 
     public PersonEntity(String name, String surname, int age, String phoneNumber, String cityOfLiving) {
-//        this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.cityOfLiving = cityOfLiving;
     }
+//
+//    public long getId() {
+//        return id;
+//    }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+//    public void setId(long id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;
