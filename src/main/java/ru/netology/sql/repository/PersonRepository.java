@@ -11,13 +11,13 @@ import java.util.List;
 @Repository
 public interface PersonRepository extends JpaRepository<PersonEntity, String> {
 
-//    @Query("SELECT p FROM PersonEntity p WHERE lower(p.cityOfLiving) = lower(:city)")
-//    List<PersonEntity> findAllByCityOfLiving(@Param("city") String city);
+    @Query("SELECT p FROM PersonEntity p WHERE lower(p.cityOfLiving) = lower(:city)")
+    List<PersonEntity> findAllByCityOfLiving(@Param("city") String city);
 
     @Query("SELECT p FROM PersonEntity p WHERE LOWER(p.name) = LOWER(:name)")
     List<PersonEntity> findByName(@Param("name") String name);
 
 
-//    @Query("SELECT p FROM PersonEntity p")
-//    List<PersonEntity> findAll();
+    @Query("SELECT p FROM PersonEntity p")
+    List<PersonEntity> findAll();
 }
