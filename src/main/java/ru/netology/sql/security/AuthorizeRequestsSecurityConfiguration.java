@@ -3,6 +3,7 @@ package ru.netology.sql.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
@@ -22,7 +23,7 @@ public class AuthorizeRequestsSecurityConfiguration {
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
         UserDetails admin = User.builder().username("admin").password(encoder.encode("admin")).roles("admin").build();
-        UserDetails moderator= User.builder().username("moder").password(encoder.encode("1111")).roles("moderator").build();
+        UserDetails moderator = User.builder().username("moder").password(encoder.encode("1111")).roles("moderator").build();
 
         UserDetails Ivan = User.builder().username("Иван").password(encoder.encode("user")).roles("user").build();
         UserDetails Petr = User.builder().username("Петр").password(encoder.encode("user")).roles("user").build();
@@ -40,10 +41,7 @@ public class AuthorizeRequestsSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers(HttpMethod.GET, "/people").hasRole("admin")
-                        .requestMatchers(HttpMethod.GET, "/people/ages/*").hasAnyRole("admin", "moderator")
-                        .requestMatchers(HttpMethod.GET, "/people/names/*").hasAnyRole("user", "admin", "moderator")
-                        .requestMatchers(HttpMethod.GET, "/people/cities/*").hasAnyRole("admin", "moderator")
+                        .requestMatchers(HttpMethod.GET, "/welcome").anonymous()
                         .anyRequest().authenticated())
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll).build();
     }
